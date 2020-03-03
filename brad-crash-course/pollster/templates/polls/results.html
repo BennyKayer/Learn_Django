@@ -1,4 +1,7 @@
 {% extends 'base.html' %} {% block content %}
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <h1 class="mb-5 text-center">{{ question.question_text }}</h1>
 
 <ul class="list-group mb-5">
@@ -12,8 +15,55 @@
     {% endfor %}
 </ul>
 
+<div id="myChart"></div>
+
 <a href="{% url 'polls:index' %}" class="btn btn-secondary">Back To Polls</a>
 <a href="{% url 'polls:detail' question.id %}" class="btn btn-dark"
     >Vote again?</a
 >
+
+<script>
+    var state = {
+        items: [],
+        values: []
+    };
+    var objId = "{{ question.id }}";
+    var dataURL = `/polls/resultsdata/${objId}`;
+    $.ajax({
+        method: "GET",
+        url: dataURL,
+        success: function(response) {
+            for (var i in response) {
+                var key = Object.keys(response[i])[0];
+                var value = Object.values(response[i])[0];
+
+                state.values.push(value);
+                state.items.push(key);
+                console.log(state.items);
+                console.log(state.values);
+            }
+            buildChart();
+        }
+    });
+
+    function buildChart() {
+        var chartData = {
+            type: "bar",
+            "scale-x": {
+                values: state.items
+            },
+            series: [
+                {
+                    values: state.values
+                }
+            ]
+        };
+
+        zingchart.render({
+            id: "myChart",
+            data: chartData
+        });
+    }
+</script>
+
 {% endblock %}
