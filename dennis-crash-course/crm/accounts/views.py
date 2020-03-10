@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from .models import Customer, Product, Order
 from .forms import OrderForm
+from .filters import OrderFilter
 
 # Create your views here.
 
@@ -38,10 +39,14 @@ def customer(req, pk):
     orders = customer.order_set.all()
     order_count = orders.count()
 
+    myFilter = OrderFilter(req.GET, queryset=orders)
+    orders = myFilter.qs
+
     context = {
         "customer": customer,
         "orders": orders,
         "order_count": order_count,
+        "myFilter": myFilter,
     }
     return render(req, "accounts/customer.html", context)
 
