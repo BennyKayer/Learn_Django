@@ -1,4 +1,13 @@
 {% load static %}
+
+<style>
+    .hello-msg {
+        font-size: 18px;
+        color: #fff;
+        margin-right: 20px;
+    }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a href="{% url 'home' %}">
         <img
@@ -24,4 +33,8 @@
             <a class="nav-item nav-link" href="{% url 'products' %}">Products</a>
         </div>
     </div>
+
+    <span class="hello-msg">Hello, {{ request.user }}</span>
+    <span><a class="hello-msg" href=" {% url 'logout' %}">Logout</a></span>
+
 </nav>
