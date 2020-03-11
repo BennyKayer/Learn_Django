@@ -27,9 +27,10 @@ def registerPage(req):
             user = form.save()
             username = form.cleaned_data.get("username")
 
-            group = Group.objects.get(name="customer")
-            user.groups.add(group)
-            Customer.objects.create(user=user)
+            # Handled by signals
+            # group = Group.objects.get(name="customer")
+            # user.groups.add(group)
+            # Customer.objects.create(user=user)
 
             messages.success(req, f"Account was created for {username}")
 
