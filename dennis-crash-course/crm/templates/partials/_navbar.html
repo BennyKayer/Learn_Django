@@ -32,6 +32,11 @@
         <div class="navbar-nav">
             {% if request.user.is_staff %}
                 <a class="nav-item nav-link" href="{% url 'products' %}">Products</a>
+                <a href="admin/" class="nav-item nav-link">Admin Panel</a>
+            {% else %}
+        
+                <a class="nav-item nav-link"href="{% url 'account' %}" class="nav-link">Settings</a>
+        
             {% endif %}
             
         </div>
