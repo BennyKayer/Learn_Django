@@ -1,0 +1,2 @@
+release: python manage.py migrate
+web: gunicorn -w 3 django_q_django.wsgi --log-file -
