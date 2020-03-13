@@ -1,5 +1,7 @@
 # ponee
 > A lightweight Django template ready for Heroku
+# heroku config:get REDIS_URL
+redis://h:pf521b551e5e45fcc1d1b6bca72785ea38c6445b3e39e28f0987f432973503d87@ec2-3-217-239-10.compute-1.amazonaws.com:16889
 
 ## Motivation
 

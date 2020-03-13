@@ -1,4 +1,4 @@
-"""django_q_django URL Configuration
+"""todo_drf URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .settings.base import ADMIN_URL
 
 urlpatterns = [
-    path(f"{ADMIN_URL}/", admin.site.urls),
-    path("", include("demo_app.urls")),
+    path("admin/", admin.site.urls),
+    path("api/", include("api.urls")),
+    path("", include("frontend.urls")),
 ]
